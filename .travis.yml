@@ -10,7 +10,7 @@ after_success:
   - "docker push  rajatgoyalinfy/multi-server ./server"
   - "docker push  rajatgoyalinfy/multi-worker ./worker"
 script:
-  - docker run rajatgoyalinfy/react-test npm test -- -- coverage
+  - docker run rajatgoyalinfy/react-test npm test -- --coverage
 before_install: 
   - "docker build -t rajatgoyalinfy/react-test -f ./client/Dockerfile.dev ."
 services: 
