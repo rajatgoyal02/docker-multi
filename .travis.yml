@@ -1,22 +1,18 @@
-sudo:required
-services:
-	-docker
-
-before_install:
-	- docker build -t rajatgoyalinfy/react-test -f ./client/Dockerfile.dev .
-
-script:
-	- docker run rajatgoyalinfy/react-test npm test -- -- coverage
-
-after_success:
-	- docker build -t rajatgoyalinfy/multi-client ./client
-	- docker build -t rajatgoyalinfy/multi-nginx ./nginx
-	- docker build -t rajatgoyalinfy/multi-nginx ./server
-	- docker build -t rajatgoyalinfy/multi-nginx ./worker
-
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID"  --password-stdin
-        - docker push  rajatgoyalinfy/multi-client ./client
-        - docker push  rajatgoyalinfy/multi-nginx ./nginx
-        - docker push  rajatgoyalinfy/multi-nginx ./server
-        - docker push  rajatgoyalinfy/multi-nginx ./worker
-
+--- 
+after_success: 
+  - "docker build -t rajatgoyalinfy/multi-client ./client"
+  - "docker build -t rajatgoyalinfy/multi-nginx ./nginx"
+  - "docker build -t rajatgoyalinfy/multi-nginx ./server"
+  - "docker build -t rajatgoyalinfy/multi-nginx ./worker"
+  - "echo \"$DOCKER_PASSWORD\" | docker login -u \"$DOCKER_ID\"  --password-stdin"
+  - "docker push  rajatgoyalinfy/multi-client ./client"
+  - "docker push  rajatgoyalinfy/multi-nginx ./nginx"
+  - "docker push  rajatgoyalinfy/multi-nginx ./server"
+  - "docker push  rajatgoyalinfy/multi-nginx ./worker"
+before_install: 
+  - "docker build -t rajatgoyalinfy/react-test -f ./client/Dockerfile.dev ."
+script: 
+  - "docker run rajatgoyalinfy/react-test npm test -- -- coverage"
+services: 
+  - docker
+sudo: required
