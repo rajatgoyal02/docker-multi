@@ -11,8 +11,6 @@ after_success:
   - "docker push  rajatgoyalinfy/multi-worker ./worker"
 before_install: 
   - "docker build -t rajatgoyalinfy/react-test -f ./client/Dockerfile.dev ."
-script: 
-  - "docker run rajatgoyalinfy/react-test npm test -- -- coverage"
 services: 
   - docker
 sudo: required
