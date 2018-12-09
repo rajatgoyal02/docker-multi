@@ -3,13 +3,20 @@ services:
 	-docker
 
 before_install:
-	- docker build -t rajat/react-test -f ./client/dockerfile.dev
+	- docker build -t rajatgoyalinfy/react-test -f ./client/Dockerfile.dev .
 
 script:
-	- docker run rajat/react-test npm test -- -- coverage
+	- docker run rajatgoyalinfy/react-test npm test -- -- coverage
 
 after_success:
-	- docker build -t rajat/multi-client ./client
-	- docker build -t rajat/multi-nginx ./nginx
-	- docker build -t rajat/multi-nginx ./server
-	- docker build -t rajat/multi-nginx ./worker
+	- docker build -t rajatgoyalinfy/multi-client ./client
+	- docker build -t rajatgoyalinfy/multi-nginx ./nginx
+	- docker build -t rajatgoyalinfy/multi-nginx ./server
+	- docker build -t rajatgoyalinfy/multi-nginx ./worker
+
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID"  --password-stdin
+        - docker push  rajatgoyalinfy/multi-client ./client
+        - docker push  rajatgoyalinfy/multi-nginx ./nginx
+        - docker push  rajatgoyalinfy/multi-nginx ./server
+        - docker push  rajatgoyalinfy/multi-nginx ./worker
+
