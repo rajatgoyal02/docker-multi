@@ -7,8 +7,8 @@ after_success:
   - "echo \"$DOCKER_PASSWORD\" | docker login -u \"$DOCKER_ID\"  --password-stdin"
   - "docker push  rajatgoyalinfy/multi-client ./client"
   - "docker push  rajatgoyalinfy/multi-nginx ./nginx"
-  - "docker push  rajatgoyalinfy/multi-nginx ./server"
-  - "docker push  rajatgoyalinfy/multi-nginx ./worker"
+  - "docker push  rajatgoyalinfy/multi-server ./server"
+  - "docker push  rajatgoyalinfy/multi-worker ./worker"
 before_install: 
   - "docker build -t rajatgoyalinfy/react-test -f ./client/Dockerfile.dev ."
 script: 
