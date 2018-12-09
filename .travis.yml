@@ -1,0 +1,15 @@
+sudo:required
+services:
+	-docker
+
+before_install:
+	- docker build -t rajat/react-test -f ./client/dockerfile.dev
+
+script:
+	- docker run rajat/react-test npm test -- -- coverage
+
+after_success:
+	- docker build -t rajat/multi-client ./client
+	- docker build -t rajat/multi-nginx ./nginx
+	- docker build -t rajat/multi-nginx ./server
+	- docker build -t rajat/multi-nginx ./worker
