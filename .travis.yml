@@ -2,8 +2,8 @@
 after_success: 
   - "docker build -t rajatgoyalinfy/multi-client ./client"
   - "docker build -t rajatgoyalinfy/multi-nginx ./nginx"
-  - "docker build -t rajatgoyalinfy/multi-nginx ./server"
-  - "docker build -t rajatgoyalinfy/multi-nginx ./worker"
+  - "docker build -t rajatgoyalinfy/multi-server ./server"
+  - "docker build -t rajatgoyalinfy/multi-worker ./worker"
   - "echo \"$DOCKER_PASSWORD\" | docker login -u \"$DOCKER_ID\"  --password-stdin"
   - "docker push  rajatgoyalinfy/multi-client "
   - "docker push  rajatgoyalinfy/multi-nginx "
