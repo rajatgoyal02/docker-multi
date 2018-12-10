@@ -5,10 +5,10 @@ after_success:
   - "docker build -t rajatgoyalinfy/multi-nginx ./server"
   - "docker build -t rajatgoyalinfy/multi-nginx ./worker"
   - "echo \"$DOCKER_PASSWORD\" | docker login -u \"$DOCKER_ID\"  --password-stdin"
-  - "docker push  rajatgoyalinfy/multi-client ./client"
-  - "docker push  rajatgoyalinfy/multi-nginx ./nginx"
-  - "docker push  rajatgoyalinfy/multi-server ./server"
-  - "docker push  rajatgoyalinfy/multi-worker ./worker"
+  - "docker push  rajatgoyalinfy/multi-client "
+  - "docker push  rajatgoyalinfy/multi-nginx "
+  - "docker push  rajatgoyalinfy/multi-server "
+  - "docker push  rajatgoyalinfy/multi-worker "
 script:
   - docker run rajatgoyalinfy/react-test npm test -- --coverage
 before_install: 
